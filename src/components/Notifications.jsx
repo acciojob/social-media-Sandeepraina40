@@ -1,27 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const Notifications = () => {
-  const [notes, setNotes] = useState([]);
+  const [notifications, setNotifications] = useState([]);
 
-  const refresh = () => {
-    setNotes([
-      'Alice liked your post',
-      'Bob commented on your post',
-      'Charlie reacted with 😂',
+  const refreshNotifications = () => {
+    setNotifications([
+      "You have a new follower!",
+      "Your post was liked!",
+      "Someone commented on your post"
     ]);
   };
 
   return (
     <div>
-      <h2>Notifications</h2>
-      <button className="button" onClick={refresh}>Refresh Notifications</button>
+      <button className="button" onClick={refreshNotifications}>Refresh Notifications</button>
       <section className="notificationsList">
-        {notes.map((n, i) => (
-          <div key={i}>{n}</div>
-        ))}
+        {notifications.map((n,i)=> <div key={i}>{n}</div>)}
       </section>
     </div>
-  );
+  )
 };
 
 export default Notifications;

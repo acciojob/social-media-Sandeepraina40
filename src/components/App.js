@@ -1,32 +1,33 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch, Redirect, Link } from 'react-router-dom';
-import Home from './Home';
-import Users from './Users';
-import UserPosts from './UserPosts';
-import Notifications from './Notifications';
-import ViewPost from './ViewPost';
-import '../styles/App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from "react-router-dom";
+import LandingPage from "./LandingPage";
+import UsersPage from "./UsersPage";
+import UserPosts from "./UserPosts"; // IMPORT MISSING
+import Notifications from "./Notifications";
+import PostDetails from "./PostDetails";
+import "../styles/App.css";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <div className="App">
         <h1>GenZ</h1>
-        <nav>
-          <Link to="/">Posts</Link> |{' '}
-          <Link to="/users">Users</Link> |{' '}
+        <nav className="tabs">
+          <Link to="/">Posts</Link>
+          <Link to="/users">Users</Link>
           <Link to="/notifications">Notifications</Link>
         </nav>
+
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/users" component={Users} />
-          <Route path="/users/:userId" component={UserPosts} />
+          <Route exact path="/" component={LandingPage} />
+          <Route path="/users/:userId/posts" component={UserPosts} />
+          <Route path="/users" component={UsersPage} />
           <Route path="/notifications" component={Notifications} />
-          <Route path="/posts/:postId" component={ViewPost} />
+          <Route path="/posts/:postId" component={PostDetails} />
           <Redirect to="/" />
         </Switch>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 };
 
