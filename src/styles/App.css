@@ -1,14 +1,149 @@
+/* Global Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f5f6fa;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
 
-.App {
-  padding: 20px;
+h1, h2 {
+  text-align: center;
+  color: #2f3640;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
 nav a {
-  margin-right: 10px;
+  text-decoration: none;
+  color: #40739e;
+  font-weight: bold;
+  transition: color 0.3s;
 }
 
-.posts-list .post {
-  border: 1px solid #ccc;
+nav a:hover {
+  color: #e84118;
+}
+
+/* Create Post Section */
+section {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+#postAuthor, #postContent, #postTitle {
+  width: 100%;
+  margin: 10px 0;
   padding: 10px;
-  margin-top: 10px;
+  font-size: 1rem;
+  border: 1px solid #dcdde1;
+  border-radius: 5px;
+}
+
+#postContent, textarea {
+  min-height: 80px;
+}
+
+.button {
+  background-color: #40739e;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin-top: 5px;
+}
+
+.button:hover {
+  background-color: #2f3640;
+}
+
+/* Posts List */
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 700px;
+  margin: 0 auto 40px auto;
+}
+
+.post {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.post:hover {
+  transform: translateY(-3px);
+}
+
+.post p {
+  margin: 5px 0;
+}
+
+/* Reaction Buttons */
+.post button {
+  margin: 5px 5px 0 0;
+  font-size: 0.9rem;
+  padding: 5px 8px;
+  border-radius: 5px;
+}
+
+/* Users List */
+ul {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 0;
+  list-style: none;
+}
+
+ul li {
+  background-color: #fff;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+ul li a {
+  text-decoration: none;
+  color: #2f3640;
+  font-weight: bold;
+}
+
+/* Notifications */
+.notificationsList {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+.notificationsList div {
+  background-color: #f1f2f6;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-left: 4px solid #40739e;
+  border-radius: 5px;
+}
+
+/* Inputs focus effect */
+input:focus, textarea:focus, select:focus {
+  border-color: #40739e;
+  outline: none;
+  box-shadow: 0 0 5px rgba(64, 115, 158, 0.5);
 }

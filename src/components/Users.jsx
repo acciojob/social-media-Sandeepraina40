@@ -1,21 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Users = ({ posts, users }) => {
+const users = ['Alice', 'Bob', 'Charlie'];
+
+const Users = () => {
   return (
     <div>
       <h2>Users</h2>
       <ul>
-        {users.map((u, idx) => (
-          <li key={idx}>
-            <h3>{u}</h3>
-            <ul>
-              {posts.filter(p => p.author === u).map(p => (
-                <li key={p.id} className="post">
-                  <h4>{p.title}</h4>
-                  <p>{p.content}</p>
-                </li>
-              ))}
-            </ul>
+        {users.map((u, i) => (
+          <li key={i}>
+            <Link to={`/users/${u}`}>{u}</Link>
           </li>
         ))}
       </ul>

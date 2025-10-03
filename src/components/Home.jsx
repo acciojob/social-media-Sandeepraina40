@@ -1,75 +1,67 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Home = ({ posts, setPosts, users }) => {
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState(users[0]);
+const initialPosts = [
+  { id: 1, author: 'Alice', content: 'Hello World!', reactions: [0,0,0,0,0] },
+  { id: 2, author: 'Bob', content: 'React is fun!', reactions: [0,0,0,0,0] },
+];
+
+const authors = ['Alice', 'Bob', 'Charlie'];
+
+const Home = () => {
+  const [posts, setPosts] = useState(initialPosts);
+  const [author, setAuthor] = useState(authors[0]);
   const [content, setContent] = useState('');
 
-  const addPost = (e) => {
-    e.preventDefault();
+  const handleAddPost = () => {
     const newPost = {
       id: posts.length + 1,
-      title,
       author,
       content,
-      reactions: [0, 0, 0, 0, 0],
+      reactions: [0,0,0,0,0],
     };
     setPosts([newPost, ...posts]);
-    setTitle('');
     setContent('');
-    setAuthor(users[0]);
   };
 
-  const addReaction = (postId, index) => {
-    setPosts(posts.map(post => {
-      if (post.id === postId) {
-        const newReactions = [...post.reactions];
-        if (index < 4) newReactions[index] += 1; // first 4 buttons increment
-        return { ...post, reactions: newReactions };
+  const handleReact = (postId, index) => {
+    setPosts(posts.map(p => {
+      if(p.id === postId){
+        const newReactions = [...p.reactions];
+        if(index < 4) newReactions[index] += 1; // Only first 4 react buttons increase
+        return { ...p, reactions: newReactions };
       }
-      return post;
+      return p;
     }));
   };
 
   return (
     <div>
-      <section className="create-post">
+      <section>
         <h2>Create Post</h2>
-        <form onSubmit={addPost}>
-          <input
-            id="postTitle"
-            placeholder="Title"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <select id="postAuthor" value={author} onChange={(e) => setAuthor(e.target.value)}>
-            {users.map(u => <option key={u}>{u}</option>)}
-          </select>
-          <textarea
-            id="postContent"
-            placeholder="Content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
-          <button type="submit">Submit</button>
-        </form>
+        <select id="postAuthor" value={author} onChange={e => setAuthor(e.target.value)}>
+          {authors.map(a => <option key={a}>{a}</option>)}
+        </select>
+        <textarea id="postContent" value={content} onChange={e => setContent(e.target.value)} />
+        <button className="button" onClick={handleAddPost}>Add Post</button>
       </section>
 
       <section className="posts-list">
-        {posts.map(post => (
-          <div key={post.id} className="post">
-            <h3>{post.title}</h3>
-            <p>{post.author}</p>
-            <p>{post.content}</p>
+        {posts.map(p => (
+          <div key={p.id} className="post">
+            <p><strong>{p.author}</strong>: {p.content}</p>
             <div>
-              {post.reactions.map((count, idx) => (
-                <button key={idx} onClick={() => addReaction(post.id, idx)}>
-                  {count}
+              {p.reactions.map((r, idx) => (
+                <button key={idx} onClick={() => handleReact(p.id, idx)}>
+                  {r} {idx === 0 && '👍'}
+                  {idx === 1 && '❤️'}
+                  {idx === 2 && '😂'}
+                  {idx === 3 && '😮'}
+                  {idx === 4 && '👎'}
                 </button>
               ))}
             </div>
-            <Link className="button" to={`/posts/${post.id}`}>Edit</Link>
+            <Link to={`/posts/${p.id}`} className="button">View Post</Link>
           </div>
         ))}
       </section>
